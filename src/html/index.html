@@ -1,0 +1,59 @@
+!<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Back</title>
+        <meta name="description" content="My js13kGame Entry">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="/js/main.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <canvas id=a>
+            <script>
+            x=a.getContext`2d`;
+            screen=0;
+            setInterval(e=>{ 
+                switch(screen) {
+                case 0: /* draw title screen */ break;
+                case 1: /* new game state */ break;
+                case 2: /* running game state */ break;
+                case 3: /* game over state */ break;
+                case 4: /* win game state */ break;
+                case 5: /* settings */ break;
+                }
+             },33);
+            onclick=e=>{ 
+                x = e.pageX;
+                y = e.pageY;
+                switch(screen) {
+                    case 0: /* draw title screen */ break;
+                    case 1: /* new game state */ break;
+                    case 2: /* running game state */ break;
+                    case 3: /* game over state */ break;
+                    case 4: /* win game state */ break;
+                    case 5: /* settings */ break;
+                }
+             }
+            oninput=e=>{ 
+                switch(screen) {
+                    case 0: /* draw title screen */ break;
+                    case 1: /* new game state */ break;
+                    case 2: /* running game state */ break;
+                    case 3: /* game over state */ break;
+                    case 4: /* win game state */ break;
+                    case 5: /* settings */ break;
+                }
+             }
+            </script>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
