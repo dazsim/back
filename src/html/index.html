@@ -1,55 +1,203 @@
-!<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!DOCTYPE html>
+
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Back</title>
         <meta name="description" content="My js13kGame Entry">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
-        <script src="/js/main.js"></script>
+        <script src="../js/main.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <canvas id=a>
+        
+        <canvas id=a style="width: 100%; height: 100%">
             <script>
             x=a.getContext`2d`;
+            a.width = window.innerWidth;
+            a.height = window.innerHeight;
             screen=0;
             setInterval(e=>{ 
                 switch(screen) {
-                case 0: /* draw title screen */ break;
-                case 1: /* new game state */ break;
-                case 2: /* running game state */ break;
+                case 0: /* draw title screen */ 
+                    x.fillStyle = "#f00";
+                    x.fillRect(0,0,a.width,a.height);
+                    x.font = fnt;
+                    x.fillStyle = "#fff";
+                    
+                    //var ti = "Tips"
+                    x.fillText(ng,(a.width/2)-(x.measureText(ng).width/2),a.height*0.3)
+                    x.fillText(se,(a.width/2)-(x.measureText(se).width/2),a.height*0.5)
+                    //x.fillText(ti,(a.width/2)-(x.measureText(ti).width/2),a.height*0.7)
+
+                    break;
+                case 1: /* new game state */
+                    
+                    break;
+
+                case 2: /* running game state */ 
+                    
+                    if (Key.isDown(Key.W)) 
+                    {
+                        if (car_speed < car_max_speed)
+                            car_speed +=2
+                    } else
+                    {
+                        if (car_speed>0)
+                        car_speed --
+                    }
+                    if (Key.isDown(Key.A))
+                    {
+                        if (car_x > (a.width*0.1))
+                        {
+                            car_x-=(a.width*0.02)
+                        } else
+                        car_x = a.width*0.1
+                    }
+                    if (Key.isDown(Key.D))
+                    {
+                        if (car_x  < a.width - (a.width*0.2))
+                        {
+                            car_x+=(a.width*0.02)
+                        }
+                    }
+                    if (Key.isDown(Key.S))
+                    {
+                        if(car_speed > 0)
+                        {
+                            car_speed -=4
+                            if (car_speed < 0)
+                                car_speed = 0
+                        }
+                    }
+                    // if random number is 0 do something
+                    if (car_speed > 0 )
+                    {
+                        if (!Math.floor(Math.random() * 11) )
+                        {
+                            // update bend in road    
+                            current_road += (Math.floor(Math.random() * 3)-1)
+                            if (current_road<-3) current_road = -3
+                            if (current_road>3) current_road = 3
+                            console.log('current road: ' + current_road)
+                        }
+                        if (car_x + current_road > a.width*0.1 && car_x + current_road < a.width*0.7)
+                        {
+                            car_x += current_road //* (car_speed/2)
+                            car_y = 0
+                        } else
+                        {
+                            // car is in trouble
+                            if ( (car_speed >20))
+                            {
+                               
+                                car_speed -=3
+                                if (car_speed < 0)
+                                car_speed = 0
+                                car_y = Math.floor(Math.random() * 8) -4
+                            }
+                        }
+                    }
+                    // apply bend to car movement
+                    
+                    
+
+                    // draw background
+                    x.fillStyle = "#99f";
+                    x.fillRect(0,0,a.width,a.height);
+                    x.font = fnt;
+                    // draw car
+                    x.fillStyle = "#f00";
+                    x.fillRect(car_x,a.height*0.8 + car_y,(a.width*0.1),a.height*0.1)
+                    // draw text
+                    x.fillStyle = "#fff";
+                    x.fillText(sc + score,getLineHeight(x),a.height-(getLineHeight(x)))
+                    //x.font = speedo
+                    //console.log(a.width - x.measureText(car_speed).width)
+                    console.log(car_speed);
+                    x.fillText("" + car_speed,25,50)
+                    score+=car_speed
+                    position+=car_speed
+                    
+                    break;
                 case 3: /* game over state */ break;
                 case 4: /* win game state */ break;
-                case 5: /* settings */ break;
+                case 5: /* settings */ 
+                    x.fillStyle = "#f00";
+                    x.fillRect(0,0,a.width,a.height);
+                    x.font = fnt;
+                    x.fillStyle = "#fff";
+                    
+                    //var ti = "Tips"
+                    x.fillText("Back",(a.width/2)-(x.measureText("Back").width/2),a.height*0.3)
+                    //x.fillText("Back",(a.width/2)-(x.measureText("Back").width/2),a.height*0.5)
+                    break;
                 }
+                gameTick++;
              },33);
             onclick=e=>{ 
-                x = e.pageX;
-                y = e.pageY;
+                px = e.pageX;
+                py = e.pageY;
                 switch(screen) {
-                    case 0: /* draw title screen */ break;
-                    case 1: /* new game state */ break;
-                    case 2: /* running game state */ break;
-                    case 3: /* game over state */ break;
-                    case 4: /* win game state */ break;
-                    case 5: /* settings */ break;
+                    case 0: /* mouse clicks title screen */ 
+
+                       
+                        if (checkBounds(e,
+                                (a.width/2)-(x.measureText(ng).width/2),
+                                
+                                (a.height)*0.3-getLineHeight(x),
+                                (a.width/2)+(x.measureText(ng).width/2),
+                                (a.height)*0.3
+                        )) 
+                        {
+                            screen = 2
+                            gameTick = 0
+                            resetGamestate()
+                            break;
+                        }
+                        if (checkBounds(e,
+                                (a.width/2)-(x.measureText(se).width/2),
+                                
+                                (a.height)*0.5-getLineHeight(x),
+                                (a.width/2)+(x.measureText(se).width/2),
+                                (a.height)*0.5
+                        )) 
+                        {
+                            screen = 5
+                            gameTick = 0
+                        }
+
+                        break;
+                    case 1: /* mouse clicks new game state */ break;
+                    case 2: /* mouse clicks running game state */ break;
+                    case 3: /* mouse clicks game over state */ break;
+                    case 4: /* mouse clicks win game state */ break;
+                    case 5: /* mouse clicks settings */ 
+                        if (checkBounds(e,
+                                (a.width/2)-(x.measureText(bk).width/2),
+                                
+                                (a.height)*0.3-getLineHeight(x,bk),
+                                (a.width/2)+(x.measureText(bk).width/2),
+                                (a.height)*0.3
+                        )) 
+                        {
+                            screen = 0
+                            gameTick = 0
+                            break;
+                        }
+                        break;
                 }
              }
             oninput=e=>{ 
                 switch(screen) {
-                    case 0: /* draw title screen */ break;
-                    case 1: /* new game state */ break;
-                    case 2: /* running game state */ break;
-                    case 3: /* game over state */ break;
-                    case 4: /* win game state */ break;
-                    case 5: /* settings */ break;
+                    case 0: /* check input title screen */ break;
+                    case 1: /* check input new game state */ break;
+                    case 2: /* check input running game state */ 
+                        // check game input. w = accelerate, a/d = turn
+                        
+                        break;
+                    case 3: /* check input game over state */ break;
+                    case 4: /* check input win game state */ break;
+                    case 5: /* check input settings */ break;
                 }
              }
             </script>
