@@ -35,7 +35,7 @@
                     break;
 
                 case 2: /* running game state */ 
-                    
+                    /* movement */
                     if (Key.isDown(Key.W)) 
                     {
                         if (car_speed < car_max_speed)
@@ -49,7 +49,7 @@
                     {
                         if (car_x > (a.width*0.1))
                         {
-                            car_x-=(a.width*0.02)
+                            car_x-=(a.width*0.02)*Math.floor(Math.sqrt(car_speed/2))
                         } else
                         car_x = a.width*0.1
                     }
@@ -57,7 +57,7 @@
                     {
                         if (car_x  < a.width - (a.width*0.2))
                         {
-                            car_x+=(a.width*0.02)
+                            car_x+=(a.width*0.02)*Math.floor(Math.sqrt(car_speed/2))
                         }
                     }
                     if (Key.isDown(Key.S))
@@ -80,7 +80,7 @@
                             if (current_road>3) current_road = 3
                             console.log('current road: ' + current_road)
                         }
-                        if (car_x + current_road > a.width*0.1 && car_x + current_road < a.width*0.7)
+                        if (car_x + current_road > a.width*0.2 && car_x + current_road < a.width*0.7)
                         {
                             car_x += current_road //* (car_speed/2)
                             car_y = 0
@@ -105,17 +105,43 @@
                     x.fillStyle = "#99f";
                     x.fillRect(0,0,a.width,a.height);
                     x.font = fnt;
+                    // draw grass 
+                    x.fillStyle = "#2b2"
+                    x.fillRect(0,a.height/2,a.width,a.height *0.5)
+                    // draw road
+                    x.fillStyle = "#002"
+                    x.beginPath()
+                    
+                    x.moveTo(a.width*0.2,a.height)
+                    // bottom line
+                    x.lineTo(a.width*0.8,a.height)
+                    /*
+                    x.lineTo(a.width*0.75,a.height*0.75)
+                    x.lineTo((a.width/10)*(7+ current_road),a.height/2)*/
+                    x.bezierCurveTo(a.width*0.75,a.height*0.75,
+                                    (a.width*0.75 + (a.width/10)*(7+ current_road))/2,a.height*0.75,
+                                    (a.width/10)*(7+ current_road),a.height/2)
+                    x.lineTo((a.width/10)*(3+ current_road),a.height/2)
+                    x.bezierCurveTo((a.width/10)*(3+ current_road),a.height/2,
+                                    
+                                    (a.width*0.25 + (a.width/10)*(3+ current_road))/2,a.height*0.75,
+                                    a.width*0.25,a.height*.75
+                                    )
+                    x.fill()
+                    
+                    
+                    
                     // draw car
                     x.fillStyle = "#f00";
                     x.fillRect(car_x,a.height*0.8 + car_y,(a.width*0.1),a.height*0.1)
                     // draw text
                     x.fillStyle = "#fff";
-                    x.fillText(sc + score,getLineHeight(x),a.height-(getLineHeight(x)))
+                    x.fillText(sc + (score/1609).toFixed(2),getLineHeight(x),a.height-(getLineHeight(x)))
                     //x.font = speedo
                     //console.log(a.width - x.measureText(car_speed).width)
-                    console.log(car_speed);
+                    //console.log(car_speed);
                     x.fillText("" + car_speed,25,50)
-                    score+=car_speed
+                    score+=car_speed/60
                     position+=car_speed
                     
                     break;

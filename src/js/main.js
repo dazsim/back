@@ -38,7 +38,7 @@ var car_x = 0;
 var car_y = 0;
 var car_speed = 0;
 var score = 0;
-var car_max_speed = 10;
+var car_max_speed = 120;
 var current_road = 0;
 
 //This is our js for the game
@@ -67,6 +67,6 @@ function resetGamestate()
     car_speed = 0
     score = 0
     car_x = a.width/2
-    car_max_speed = 100
+    car_max_speed = 120
     
 }
