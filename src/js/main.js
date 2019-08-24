@@ -70,3 +70,4 @@ function resetGamestate()
     car_max_speed = 120
     
 }
+
