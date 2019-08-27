@@ -28,6 +28,21 @@ var Key = {
       }
 }
 
+/** Styles for game */
+
+
+
+function getGrad(x,x1,y1,x2,y2,c0,c1)
+{
+    
+
+    var dash1 = x.createLinearGradient(x1, y1, x2, y2);
+    dash1.addColorStop(0, c0);
+    dash1.addColorStop(1, c1);
+    return dash1
+}
+
+
 window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
 window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
 
