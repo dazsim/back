@@ -41,6 +41,7 @@ var score = 0;
 var car_max_speed = 120;
 var current_road = 0;
 
+
 //This is our js for the game
 function checkBounds(e,x,y,z,r)
 {
