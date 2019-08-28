@@ -72,17 +72,18 @@
                     // if random number is 0 do something
                     if (car_speed > 0 )
                     {
+                        // 1 in 10 chance
                         if (!Math.floor(Math.random() * 11) )
                         {
                             // update bend in road    
-                            current_road += (Math.floor(Math.random() * 3)-1)
+                            current_road += (Math.floor(Math.random() * 4)-2)
                             if (current_road<-3) current_road = -3
                             if (current_road>3) current_road = 3
                             console.log('current road: ' + current_road)
                         }
                         if (car_x + current_road > a.width*0.2 && car_x + current_road < a.width*0.7)
                         {
-                            car_x -= current_road //* (car_speed/2)
+                            car_x -= current_road >0 ? 0.01 : current_road <0 ? -0.01 : 0; //* (car_speed/2)
                             car_y = 0
                         } else
                         {
