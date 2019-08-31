@@ -181,7 +181,25 @@
                     //x.font = speedo
                     //console.log(a.width - x.measureText(car_speed).width)
                     //console.log(car_speed);
-                    x.fillText("" + car_speed,25,50)
+                    //x.fillText("" + car_speed,a.width*0.05,a.height*0.82)
+                    x.shadowBlur = 10
+                    x.shadowColor = "#bbf"
+                    // draw speed
+                    drawDigit(x,a.width*0.075+36,a.height*0.75,Math.floor(car_speed % 10),32)
+                    drawDigit(x,a.width*0.075,a.height*0.75,Math.floor((car_speed/10) % 10),32)
+                    drawDigit(x,a.width*0.075-36,a.height*0.75,Math.floor((car_speed/100) % 10),32)
+                    // draw speed in graphical form.
+                    for(n=0;n<Math.floor(car_speed/10);n++)
+                    {
+                        // draw each element 1-12 max?
+                        x.fillStyle = speed_colors[Math.floor(n/4)];
+                        x.fillRect(a.width*0.025+n*24,a.height*0.75+100,24,8*(Math.floor(n/4)+1))
+                        
+                    }
+                   
+                    // reset blur
+                    x.shadowBlur = 0
+                    
                     score+=car_speed/60
                     position+=car_speed
                     
