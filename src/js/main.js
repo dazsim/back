@@ -1,9 +1,9 @@
 // globals
 
-var ng = 'New Game'
-var se = "Settings"
-var bk = "Back"
-var sc = "Score: ";
+var text_new_game = 'New Game'
+var text_settings = "Settings"
+var text_back = "Back"
+var text_score = "Score: ";
 
 var fnt = "40px Tahoma";
 var speedo = "60px Tahoma";
@@ -67,6 +67,8 @@ var speed_colors = [
 
 
 //This is our js for the game
+
+/** Are we inside the bounds?  */
 function checkBounds(e,x,y,z,r)
 {
     px = e.pageX
@@ -76,6 +78,7 @@ function checkBounds(e,x,y,z,r)
     return false
 }
 
+/** gets the approximate height of the current font. */
 function getLineHeight(e)
 {
     e.save()
@@ -85,6 +88,7 @@ function getLineHeight(e)
     return lineHeight
 }
 
+/** resets all variables required to bring game back to its base state */
 function resetGamestate()
 {
     position = 0
@@ -98,6 +102,7 @@ function resetGamestate()
     
 }
 
+/** This function builds a 7 segment display from individual elements based on which number I want to render */
 function drawDigit(cx,x,y,value,size)
 {
     
@@ -176,6 +181,7 @@ function drawDigit(cx,x,y,value,size)
     }
 }
 
+/* Draw a top 7-seg display element */
 function drawTop(cx,x,y,size)
 {
     cx.beginPath()
@@ -186,6 +192,7 @@ function drawTop(cx,x,y,size)
     cx.fill()
 }
 
+/* Draw a bottom 7-seg display element */
 function drawBottom(cx,x,y,size)
 {
     cx.beginPath()
@@ -196,6 +203,7 @@ function drawBottom(cx,x,y,size)
     cx.fill()
 }
 
+/* Draw a middle 7-seg display element */
 function drawMiddle(cx,x,y,size)
 {
     cx.beginPath()
@@ -209,6 +217,8 @@ function drawMiddle(cx,x,y,size)
     
     cx.fill()
 }
+
+/* Draw a left hand 7-seg display element */
 function drawLeft(cx,x,y,size)
 {
     cx.beginPath()
@@ -219,6 +229,8 @@ function drawLeft(cx,x,y,size)
     cx.lineTo(x,y+size*0.1)
     cx.fill()
 }
+
+/* Draw a right hand 7-seg display element */
 function drawRight(cx,x,y,size)
 {
     cx.beginPath()
@@ -229,17 +241,9 @@ function drawRight(cx,x,y,size)
     cx.fill()
 }
 
-function drawBar(cx,x,y,width,height,color)
-{
-    cx.fillStyle = color;
-    cx.beginPath()
-    cx.moveTo(x,y)
-    cx.moveTo(x+width,y)
-    cx.moveTo(x+width,y+height)
-    cx.moveTo(x,y+height)
-    cx.fill()
-}
 
+
+/* gets the digit I want to draw */
 function getdigit(value,position)
 {
     for(n=1;n<position;n++)
@@ -247,21 +251,23 @@ function getdigit(value,position)
         value = value/10
         
     }
-    
     return (Math.floor(value % 10))
     
 }
 
+/* draws the fuel icon */
 function drawFuelIcon(cx,x,y)
 {
 
 }
 
+/* draws the oil can icon */
 function drawOilIcon(cx,x,y)
 {
 
 }
 
+/** Draws the Guage for oil(health) and fuel */
 function drawGuage(cx,x,y,state)
 {
     //console.log('guage')
@@ -284,6 +290,15 @@ function drawGuage(cx,x,y,state)
     //cx.fill()
     cx.fillRect(x+state,y-4,4,32)
     
+}
+
+/** This function resets the background for non-game screens */
+function resetUI()
+{
+    x.fillStyle = "#f00"
+    x.fillRect(0,0,a.width,a.height);
+    x.font = fnt;
+    x.fillStyle = "#fff";
 }
 
 

@@ -25,8 +25,8 @@
                     x.fillStyle = "#fff";
                     
                     //var ti = "Tips"
-                    x.fillText(ng,(a.width/2)-(x.measureText(ng).width/2),a.height*0.3)
-                    x.fillText(se,(a.width/2)-(x.measureText(se).width/2),a.height*0.5)
+                    x.fillText(text_new_game,(a.width/2)-(x.measureText(text_new_game).width/2),a.height*0.3)
+                    x.fillText(text_settings,(a.width/2)-(x.measureText(text_settings).width/2),a.height*0.5)
                     //x.fillText(ti,(a.width/2)-(x.measureText(ti).width/2),a.height*0.7)
 
                     break;
@@ -235,18 +235,19 @@
                     
                     break;
                 case 3: /* game over state */ 
+                    // draw background
+                    resetUI()
                     // display game over message
+                    
                     // high score stuff would go here
                     // draw broken down car by side of road
+                    
                     // draw score
                     
                     break;
                 case 4: /* win game state */ break;
                 case 5: /* settings */ 
-                    x.fillStyle = "#f00";
-                    x.fillRect(0,0,a.width,a.height);
-                    x.font = fnt;
-                    x.fillStyle = "#fff";
+                    resetUI()
                     
                     //var ti = "Tips"
                     x.fillText("Back",(a.width/2)-(x.measureText("Back").width/2),a.height*0.3)
@@ -267,10 +268,10 @@
 
                        
                         if (checkBounds(e,
-                                (a.width/2)-(x.measureText(ng).width/2),
+                                (a.width/2)-(x.measureText(text_new_game).width/2),
                                 
                                 (a.height)*0.3-getLineHeight(x),
-                                (a.width/2)+(x.measureText(ng).width/2),
+                                (a.width/2)+(x.measureText(text_new_game).width/2),
                                 (a.height)*0.3
                         )) 
                         {
@@ -280,10 +281,10 @@
                             break;
                         }
                         if (checkBounds(e,
-                                (a.width/2)-(x.measureText(se).width/2),
+                                (a.width/2)-(x.measureText(text_settings).width/2),
                                 
                                 (a.height)*0.5-getLineHeight(x),
-                                (a.width/2)+(x.measureText(se).width/2),
+                                (a.width/2)+(x.measureText(text_settings).width/2),
                                 (a.height)*0.5
                         )) 
                         {
@@ -298,10 +299,10 @@
                     case 4: /* mouse clicks win game state */ break;
                     case 5: /* mouse clicks settings */ 
                         if (checkBounds(e,
-                                (a.width/2)-(x.measureText(bk).width/2),
+                                (a.width/2)-(x.measureText(text_back).width/2),
                                 
-                                (a.height)*0.3-getLineHeight(x,bk),
-                                (a.width/2)+(x.measureText(bk).width/2),
+                                (a.height)*0.3-getLineHeight(x,text_back),
+                                (a.width/2)+(x.measureText(text_back).width/2),
                                 (a.height)*0.3
                         )) 
                         {
