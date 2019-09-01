@@ -55,6 +55,9 @@ var car_speed = 0;
 var score = 0;
 var car_max_speed = 120;
 var current_road = 0;
+var health = 0;
+var fuel = 100;
+var text_gameover = "";
 var speed_colors = [
     "#1f1",
 
@@ -90,6 +93,8 @@ function resetGamestate()
     score = 0
     car_x = a.width/2
     car_max_speed = 120
+    health = 100;
+    fuel = 100;
     
 }
 
@@ -226,13 +231,59 @@ function drawRight(cx,x,y,size)
 
 function drawBar(cx,x,y,width,height,color)
 {
-    x.fillStyle = color;
+    cx.fillStyle = color;
     cx.beginPath()
     cx.moveTo(x,y)
     cx.moveTo(x+width,y)
     cx.moveTo(x+width,y+height)
     cx.moveTo(x,y+height)
     cx.fill()
+}
+
+function getdigit(value,position)
+{
+    for(n=1;n<position;n++)
+    {
+        value = value/10
+        
+    }
+    
+    return (Math.floor(value % 10))
+    
+}
+
+function drawFuelIcon(cx,x,y)
+{
+
+}
+
+function drawOilIcon(cx,x,y)
+{
+
+}
+
+function drawGuage(cx,x,y,state)
+{
+    //console.log('guage')
+    cx.fillStyle = "#fff"
+    //draw the guage at x,y with the current % (state)
+    //cx.fillRect(100,100,100,100)
+    cx.fillRect(x,y+32,100,4)
+    cx.fillRect(x+24,y,2,28)
+    cx.fillRect(x+49,y,2,28)
+    cx.fillRect(x+74,y,2,28)
+    cx.fillRect(x+92,y,8,28)
+    cx.fillStyle ='#f11'
+    cx.fillRect(x,y,8,28)
+    cx.fillStyle = "#fff"
+
+    //cx.beginPath()
+    // x: x + 50 
+    //cx.moveTo(x+50,y+50)
+    //cx.lineTo(x,y+size*0.9)
+    //cx.fill()
+    cx.fillRect(x+state,y-4,4,32)
+    
 }
 
 

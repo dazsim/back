@@ -90,7 +90,7 @@
                             // car is in trouble
                             if ( (car_speed >20))
                             {
-                               
+                                health -= 0.3;
                                 car_speed -=3
                                 if (car_speed < 0)
                                 car_speed = 0
@@ -177,7 +177,7 @@
                     x.fillRect(car_x,a.height*0.5 + car_y,(a.width*0.1),a.height*0.1)
                     // draw text
                     x.fillStyle = "#fff";
-                    x.fillText(sc + (score/1609).toFixed(2),getLineHeight(x),a.height-(getLineHeight(x)))
+                    // x.fillText(sc + (score/1609).toFixed(2),getLineHeight(x),a.height-(getLineHeight(x)))
                     //x.font = speedo
                     //console.log(a.width - x.measureText(car_speed).width)
                     //console.log(car_speed);
@@ -193,18 +193,54 @@
                     {
                         // draw each element 1-12 max?
                         x.fillStyle = speed_colors[Math.floor(n/4)];
-                        x.fillRect(a.width*0.025+n*24,a.height*0.75+100,24,8*(Math.floor(n/4)+1))
+                        x.fillRect(a.width*0.025+n*24,a.height*0.75+100+32-8*(Math.floor(n/4)+1),24,8*(Math.floor(n/4)+1))
                         
                     }
-                   
                     // reset blur
                     x.shadowBlur = 0
+
+                    score+=(car_speed/6)*10
+                    x.fillStyle = "#fff";
+                    //render odometer
+                    //console.log("score :" + (Math.floor(score/2000)))
+                    for(n=0;n<8;n++)
+                    {
+                        if (getdigit((Math.floor(score/2000)),8-n)<10)
+                        {
+                            // draw this digit
+                            drawDigit(x,(a.width/2)-68+n*17,a.height*0.8,getdigit((Math.floor(score/2000)),8-n),16)
+                        }
+                    }
+
+                    // draw fuel guage - fuel left
+                    //drawFuelIcon(x,a.width,a.height)
+                    // draw oil guage - health left
+                    //drawOilIcon(x,a.width,a.height)
+                    if (health<=0)
+                    {
+                        text_gameover = "Your car has broken down. Better luck next time!"
+                    }
+
+                    if (fuel<=0)
+                    {
+                        text_gameover = "You ran out of fuel! remember to grab fuel on your journey"
+                    }
+
+
+
+                    drawGuage(x,a.width*0.68,a.height*0.8,Math.floor(health))
+                    drawGuage(x,a.width*0.85,a.height*0.8,Math.floor(fuel))
                     
-                    score+=car_speed/60
                     position+=car_speed
                     
                     break;
-                case 3: /* game over state */ break;
+                case 3: /* game over state */ 
+                    // display game over message
+                    // high score stuff would go here
+                    // draw broken down car by side of road
+                    // draw score
+                    
+                    break;
                 case 4: /* win game state */ break;
                 case 5: /* settings */ 
                     x.fillStyle = "#f00";
@@ -218,6 +254,10 @@
                     break;
                 }
                 gameTick++;
+                if (car_speed>0)
+                {
+                    fuel -= car_speed*0.0003;
+                }
              },33);
             onclick=e=>{ 
                 px = e.pageX;
