@@ -258,12 +258,49 @@ function getdigit(value,position)
 /* draws the fuel icon */
 function drawFuelIcon(cx,x,y)
 {
+    cx.fillStyle="#fff"
+    cx.beginPath()
+    cx.moveTo(x+5,y+10)
+    cx.lineTo(x+5,y+45)
+    cx.lineTo(x,y+45)
+    cx.lineTo(x,y+50)
+    cx.lineTo(x+25,y+50)
+    cx.lineTo(x+25,y+45)
+    cx.lineTo(x+20,y+45)
+    cx.lineTo(x+20,y+10)
+    cx.fill()
+
 
 }
 
 /* draws the oil can icon */
 function drawOilIcon(cx,x,y)
 {
+    cx.fillStyle="#fff"
+    cx.beginPath()
+    cx.moveTo(x+5,y+10)
+    cx.lineTo(x+29,y+10)
+    cx.lineTo(x+29,y+5)
+    cx.lineTo(x+25,y+5)
+    cx.lineTo(x+25,y+2)
+    cx.lineTo(x+35,y+2)
+    cx.lineTo(x+35,y+5)
+    cx.lineTo(x+31,y+5)
+    cx.lineTo(x+31,y+10)
+    cx.lineTo(x+40,y+10)
+    cx.lineTo(x+45,y+15)
+    cx.lineTo(x+50,y+12)
+    cx.lineTo(x+55,y+16)
+    cx.lineTo(x+55,y+18)
+    cx.lineTo(x+45,y+14)
+    cx.lineTo(x+40,y+30)
+    cx.lineTo(x+15,y+30)
+    cx.lineTo(x+15,y+7)
+    cx.lineTo(x+8,y+7)
+    cx.lineTo(x+8,y+17)
+    cx.lineTo(x+5,y+17)
+    cx.fill()
+
 
 }
 
