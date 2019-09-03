@@ -135,39 +135,39 @@
                     x.fillStyle = getGrad(x,0,0,0,170,'#222','#333');
                     
                     x.beginPath()
-                    x.moveTo(0,a.height*0.7)
-                    x.lineTo(0,a.height)
-                    x.lineTo(a.width,a.height)
-                    x.lineTo(a.width,a.height*0.7)
-                    x.bezierCurveTo(a.width,a.height*0.7,
-                                    a.width*0.9,a.height*0.6,
-                                    a.width*0.8,a.height*0.7)
-                    x.lineTo(a.width*0.2,a.height*0.7)
-                    x.bezierCurveTo(a.width*0.2,a.height*0.7,
-                                    a.width*0.1,a.height*0.6,
-                                    0,a.height*0.7)
+                    x.moveTo(0,a.height*0.7+car_y)
+                    x.lineTo(0,a.height+car_y)
+                    x.lineTo(a.width,a.height+car_y)
+                    x.lineTo(a.width,a.height*0.7+car_y)
+                    x.bezierCurveTo(a.width,a.height*0.7+car_y,
+                                    a.width*0.9,a.height*0.6+car_y,
+                                    a.width*0.8,a.height*0.7+car_y)
+                    x.lineTo(a.width*0.2,a.height*0.7+car_y)
+                    x.bezierCurveTo(a.width*0.2,a.height*0.7+car_y,
+                                    a.width*0.1,a.height*0.6+car_y,
+                                    0,a.height*0.7+car_y)
                     x.fill()
 
                     x.fillStyle = "#111"
                     x.beginPath()
-                    x.moveTo(a.width*0.01,a.height*0.75)
-                    x.bezierCurveTo(a.width*0.01,a.height*0.75,
-                                    -a.width*0.09,a.height*0.875,
-                                    a.width*0.03,a.height)
+                    x.moveTo(a.width*0.01,a.height*0.75+car_y)
+                    x.bezierCurveTo(a.width*0.01,a.height*0.75+car_y,
+                                    -a.width*0.09,a.height*0.875+car_y,
+                                    a.width*0.03,a.height+car_y)
                     //x.lineTo(a.width*0.03,a.height)
-                    x.lineTo(a.width*0.97,a.height)
+                    x.lineTo(a.width*0.97,a.height+car_y)
                     //x.lineTo(a.width*0.97,a.height*0.75)
-                    x.bezierCurveTo(a.width-a.width*0.03,a.height,
-                                    a.width+a.width*0.09,a.height*0.875,
-                                    a.width-a.width*0.01,a.height*0.75)
+                    x.bezierCurveTo(a.width-a.width*0.03,a.height+car_y,
+                                    a.width+a.width*0.09,a.height*0.875+car_y,
+                                    a.width-a.width*0.01,a.height*0.75+car_y)
 
-                    x.bezierCurveTo(a.width*0.99,a.height*0.75,
-                                    a.width*0.9,a.height*0.65,
-                                    a.width*0.82,a.height*0.75)
-                    x.lineTo(a.width*0.23,a.height*0.75)
-                    x.bezierCurveTo(a.width*0.17,a.height*0.75,
-                                    a.width*0.1,a.height*0.65,
-                                    a.width*0.01,a.height*0.75)
+                    x.bezierCurveTo(a.width*0.99,a.height*0.75+car_y,
+                                    a.width*0.9,a.height*0.65+car_y,
+                                    a.width*0.82,a.height*0.75+car_y)
+                    x.lineTo(a.width*0.23,a.height*0.75+car_y)
+                    x.bezierCurveTo(a.width*0.17,a.height*0.75+car_y,
+                                    a.width*0.1,a.height*0.65+car_y,
+                                    a.width*0.01,a.height*0.75+car_y)
                     x.fill()
                     
 
@@ -185,15 +185,15 @@
                     x.shadowBlur = 10
                     x.shadowColor = "#bbf"
                     // draw speed
-                    drawDigit(x,a.width*0.075+36,a.height*0.75,Math.floor(car_speed % 10),32)
-                    drawDigit(x,a.width*0.075,a.height*0.75,Math.floor((car_speed/10) % 10),32)
-                    drawDigit(x,a.width*0.075-36,a.height*0.75,Math.floor((car_speed/100) % 10),32)
+                    drawDigit(x,a.width*0.075+36,a.height*0.75+car_y,Math.floor(car_speed % 10),32)
+                    drawDigit(x,a.width*0.075,a.height*0.75+car_y,Math.floor((car_speed/10) % 10),32)
+                    drawDigit(x,a.width*0.075-36,a.height*0.75+car_y,Math.floor((car_speed/100) % 10),32)
                     // draw speed in graphical form.
                     for(n=0;n<Math.floor(car_speed/10);n++)
                     {
                         // draw each element 1-12 max?
                         x.fillStyle = speed_colors[Math.floor(n/4)];
-                        x.fillRect(a.width*0.025+n*24,a.height*0.75+100+32-8*(Math.floor(n/4)+1),24,8*(Math.floor(n/4)+1))
+                        x.fillRect(a.width*0.025+n*24,a.height*0.75+100+32-8*(Math.floor(n/4)+1)+car_y,24,8*(Math.floor(n/4)+1))
                         
                     }
                     // reset blur
@@ -208,14 +208,14 @@
                         if (getdigit((Math.floor(score/2000)),8-n)<10)
                         {
                             // draw this digit
-                            drawDigit(x,(a.width/2)-68+n*17,a.height*0.8,getdigit((Math.floor(score/2000)),8-n),16)
+                            drawDigit(x,(a.width/2)-68+n*17,a.height*0.8+car_y,getdigit((Math.floor(score/2000)),8-n),16)
                         }
                     }
 
                     // draw fuel guage - fuel left
-                    drawFuelIcon(x,a.width*0.71,a.height*0.85)
+                    drawFuelIcon(x,a.width*0.70,a.height*0.85+car_y)
                     // draw oil guage - health left
-                    drawOilIcon(x,a.width*0.86,a.height*0.85)
+                    drawOilIcon(x,a.width*0.86,a.height*0.87+car_y)
                     if (health<=0)
                     {
                         text_gameover = "Your car has broken down. Better luck next time!"
@@ -228,8 +228,8 @@
 
 
 
-                    drawGuage(x,a.width*0.68,a.height*0.8,Math.floor(health))
-                    drawGuage(x,a.width*0.85,a.height*0.8,Math.floor(fuel))
+                    drawGuage(x,a.width*0.68,a.height*0.8+car_y,Math.floor(health))
+                    drawGuage(x,a.width*0.85,a.height*0.8+car_y,Math.floor(fuel))
                     
                     position+=car_speed
                     
