@@ -338,4 +338,50 @@ function resetUI()
     x.fillStyle = "#fff";
 }
 
+function drawCar(cx,x,y,skew,size,speed)
+{
+    //draw wheels
+    
+    cx.fillStyle = "#222"    
+    cx.fillRect(x+size*0.1+skew*0.05*size,y+size*0.8,size*0.2,size*0.2)
+    cx.fillRect(x+size*0.7+skew*0.05*size,y+size*0.8,size*0.2,size*0.2)
+    if (skew)
+    {
+        //draw side of wheel
+        if (skew >0)
+        {
+            
+        }
+    }
+    //draw speed lines
+    
+    
+    //draw back
+    cx.fillStyle = "#c22"
+    cx.fillRect(x+skew*0.05*size,y+size*0.5,size,size*0.3)
+    cx.fillRect(x+size*0.1+skew*0.05*size,y+size*0.2,size*0.8,size*0.3)
+    //window
+    cx.fillStyle = "#622"
+    cx.fillRect(x+size*0.2+skew*0.05*size,y+size*0.25,size*0.6,size*0.2)
+    cx.fillStyle = "#f00"
+    cx.beginPath();
+    cx.arc(x+size*0.15, y+size*0.65, size*0.1, 0, 2 * Math.PI);
+    cx.fill();
+    cx.beginPath();
+    cx.arc(x+size*0.85, y+size*0.65, size*0.1, 0, 2 * Math.PI);
+    cx.fill();
+    //draw optional side(left or right)
+
+}
+
+function drawMiniVan(cx,x,y,skew,size)
+{
+
+}
+
+function drawLorry(cx,x,y,skew,size)
+{
+
+}
+
 

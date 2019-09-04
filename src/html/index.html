@@ -108,19 +108,19 @@
                     x.font = fnt;
                     // draw grass 
                     x.fillStyle = "#2b2"
-                    x.fillRect(0,a.height*0.2,a.width,a.height *0.5)
+                    x.fillRect(0,a.height*0.2,a.width,a.height *0.6)
                     // draw road
                     x.fillStyle = "#002"
                     x.beginPath()
                     
-                    x.moveTo(a.width*0.2,a.height-a.height*0.3)
+                    x.moveTo(a.width*0.2,a.height-a.height*0.2)
                     // bottom line
-                    x.lineTo(a.width*0.8,a.height-a.height*0.3)
+                    x.lineTo(a.width*0.8,a.height-a.height*0.2)
                     /*
                     x.lineTo(a.width*0.75,a.height*0.75)
                     x.lineTo((a.width/10)*(7+ current_road),a.height/2)*/
-                    x.bezierCurveTo(a.width*0.75,a.height*0.75-a.height*0.3,
-                                    (a.width*0.75 + (a.width/10)*(7+ current_road))/2,a.height*0.75-a.height*0.3,
+                    x.bezierCurveTo(a.width*0.75,a.height*0.75-a.height*0.2,
+                                    (a.width*0.75 + (a.width/10)*(7+ current_road))/2,a.height*0.75-a.height*0.2,
                                     (a.width/10)*(7+ current_road),a.height*0.2)
                     x.lineTo((a.width/10)*(3+ current_road),a.height*0.2)
                     x.bezierCurveTo((a.width/10)*(3+ current_road),a.height*0.2,
@@ -129,6 +129,9 @@
                                     a.width*0.25,a.height*.45
                                     )
                     x.fill()
+
+                     // draw car
+                     drawCar(x,car_x,a.height*0.5 + car_y,0,a.height*0.2,car_speed)
                     
                     // draw car dash
 
@@ -172,9 +175,9 @@
                     
 
                     
-                    // draw car
-                    x.fillStyle = "#f00";
-                    x.fillRect(car_x,a.height*0.5 + car_y,(a.width*0.1),a.height*0.1)
+                   
+                    //x.fillStyle = "#f00";
+                    //x.fillRect(car_x,a.height*0.5 + car_y,(a.width*0.1),a.height*0.1)
                     // draw text
                     x.fillStyle = "#fff";
                     // x.fillText(sc + (score/1609).toFixed(2),getLineHeight(x),a.height-(getLineHeight(x)))
