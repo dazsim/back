@@ -64,6 +64,7 @@ var speed_colors = [
     "#fb0",
     "#f00"
 ];
+var direction = 0;
 
 
 //This is our js for the game
@@ -354,7 +355,7 @@ function drawCar(cx,x,y,skew,size,speed)
         }
     }
     //draw speed lines
-    
+
     
     //draw back
     cx.fillStyle = "#c22"
@@ -383,5 +384,91 @@ function drawLorry(cx,x,y,skew,size)
 {
 
 }
+
+function drawBus(cx,x,y,skew,size)
+{
+
+}
+
+function drawBike(cx,x,y,skew,size)
+{
+    
+}
+
+/**
+ * We draw the horizon as a long thin strip that sits on the horizon line. city scape, mountains, forests. as much as we have time to design. 
+ */
+function drawHorizon()
+{
+    
+}
+
+/**
+ * We draw roadside elements using a "biome" generator based on the direction of travel. e.g. mountains north, beach south, forest east,
+ * city west.  This gives us somewhere to align the horizon strip with and allows us to render appropriate elements as they pass our car.
+ * each element drawn will be described as the distance travelled and the offset relative to the road.  This way we can spawn them in near 
+ * the horizon and then let them grow as they get closer maintaining the correct distance from the road as they approach. we will need an array
+ * of elements that have been generated and they get culled once they leave the bottom of the screen. 
+ * 
+ * Each element in the array will need a draw function that allows for position and scale. we will use a precomputed array to decide the size of 
+ * each element so we can create bounding boxes for them to calculate collisions
+ * 
+ * 
+ */
+
+ function drawTree(cx,x,y,size)
+ {
+
+ }
+
+ function drawSign(cx,x,y,size)
+ {
+
+ }
+
+ function drawRock(cx,x,y,size)
+ {
+
+ }
+
+ function drawCactus(cx,x,y,size)
+ {
+
+ }
+
+ function drawHouse(cx,x,y,size)
+ {
+
+ }
+
+ function drawSkyScraper(cx,x,y,size)
+ {
+
+ }
+
+ function drawHiker(cx,x,y,size)
+ {
+
+ }
+
+ function drawCloud(cx,x,y,size,seed)
+ {
+
+ }
+
+ function drawStreetLight(cx,x,y,size)
+ {
+
+ }
+
+ function drawTrafficLight(cx,x,y,size)
+ {
+
+ }
+
+ function drawStreetSign(cx,x,y,size,text1,text2)
+ {
+
+ }
 
 
