@@ -64,6 +64,9 @@ var speed_colors = [
     "#fb0",
     "#f00"
 ];
+var cactus_green = "#292"
+var cactus_low = "#2a2";
+var cactus_high = "#5e5";
 var direction = 0;
 
 
@@ -431,9 +434,44 @@ function drawHorizon()
 
  }
 
+ function drawCactusCore(cx,x,y,size)
+ {
+    cx.fillStyle = cactus_low
+    cx.beginPath()
+    cx.moveTo(x+size*0.3,y+size)
+    cx.lineTo(x+size*0.3,y+size*0.3)
+    cx.bezierCurveTo(x+size*0.3,y+size*0.3,
+        x+size*0.1,y+size*0.5,
+        x+size*0.3,y+size*0.7)
+    cx.lineTo(x+size*0.3,y+size*0.7)
+    cx.fill();
+ }
+
  function drawCactus(cx,x,y,size)
  {
+    cx.fillStyle = cactus_low
+    cx.beginPath()
+    cx.moveTo(x+size*0.3,y+size)
+    cx.lineTo(x+size*0.3,y+size*0.3)
+    cx.bezierCurveTo(x+size*0.3,y+size*0.3,
+        x+size*0.5,y,
+        x+size*0.7,y+size*0.3)
+    cx.lineTo(x+size*0.7,y+size)
+    cx.fill();
+        
+    cx.fillStyle = cactus_green
+    cx.beginPath()
+    cx.moveTo(x+size*0.3+2,y+size)
+    cx.lineTo(x+size*0.3+2,y+size*0.3)
+    cx.bezierCurveTo(x+size*0.3+2,y+size*0.3,
+        x+size*0.5,y+size*0.1+1,
+        x+size*0.7,y+size*0.3)
+    cx.lineTo(x+size*0.7,y+size)
+    cx.fill();
 
+    
+    
+    
  }
 
  function drawHouse(cx,x,y,size)
