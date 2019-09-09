@@ -434,7 +434,7 @@ function drawHorizon()
 
  }
 
- function drawCactusCore(cx,x,y,size)
+ function drawCactusVertical(cx,x,y,size)
  {
     cx.fillStyle = cactus_low
     cx.beginPath()
@@ -445,6 +445,10 @@ function drawHorizon()
         x+size*0.3,y+size*0.7)
     cx.lineTo(x+size*0.3,y+size*0.7)
     cx.fill();
+ }
+ function drawCactusHorizontal(cx,x,y,size,direction)
+ {
+     
  }
 
  function drawCactus(cx,x,y,size)
