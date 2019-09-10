@@ -54,7 +54,12 @@ var car_y = 0;
 var car_speed = 0;
 var score = 0;
 var car_max_speed = 120;
+
+// direction of road -50 == left. 50 == right. 
+// -1,0,1
 var current_road = 0;
+//direction road curves
+var road_direction = 0;
 var health = 0;
 var fuel = 100;
 var text_gameover = "";
@@ -68,7 +73,11 @@ var cactus_green = "#292"
 var cactus_low = "#2a2";
 var cactus_high = "#5e5";
 var direction = 0;
-
+var sand = "#DA2";
+var sand = "#DA2"
+var stone = "#333"
+var concrete = "#666"
+var forest = "#262"
 
 //This is our js for the game
 
@@ -103,6 +112,7 @@ function resetGamestate()
     car_max_speed = 120
     health = 100;
     fuel = 100;
+    direction = 0;
     
 }
 
@@ -401,9 +411,138 @@ function drawBike(cx,x,y,skew,size)
 /**
  * We draw the horizon as a long thin strip that sits on the horizon line. city scape, mountains, forests. as much as we have time to design. 
  */
-function drawHorizon()
+function drawHorizon(x)
 {
     
+
+    // direction 0 == north. mountains stretch from -a.width/2 to a.width/2
+    x.fillStyle=stone
+    x.fillRect(a.width/2 - a.width*0.3+(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1)
+    x.fillRect(a.width/2 - a.width*0.3- a.width*4+(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1)
+    // west forest
+
+    x.fillStyle=forest
+    x.fillRect(a.width/2 - a.width*0.3+ a.width+(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1 )
+    x.fillRect(a.width/2 - a.width*0.3-(a.width*3)+(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1 )
+    // south sand
+    x.fillStyle=sand
+    x.fillRect(a.width/2 - a.width*0.3+ a.width*2+(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1 )
+    x.fillRect(a.width/2 - a.width*0.3- a.width*2+(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1 )
+    
+
+    // east city
+    x.fillStyle=concrete
+    x.fillRect(a.width/2 - a.width*0.3+ a.width*3+(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1)
+
+    // east city #2
+    
+    x.fillRect(a.width/2 - a.width*0.3 - a.width +(direction*(a.width*4/360)),a.height*0.1,a.width*0.6,a.height*0.1)
+    if (direction>360)
+    {
+        direction -= 360
+    }
+    if (direction<0)
+    {
+        direction +=360
+    }
+}
+
+function drawRoad()
+{
+    x.fillStyle = "#002"
+    x.beginPath()
+    
+    x.moveTo(a.width*0.2,a.height*0.8)
+    // bottom line
+    x.lineTo(a.width*0.8,a.height*0.8)
+    /*
+    x.lineTo(a.width*0.75,a.height*0.75)
+    x.lineTo((a.width/10)*(7+ current_road),a.height/2)*/
+    x.bezierCurveTo(a.width*0.8,a.height*0.8,
+                    a.width*0.8 ,a.height*0.6,
+                    (a.width*0.6 + (a.width*0.009) * current_road),a.height*0.2)
+    x.lineTo((a.width*0.4 + (a.width*0.009 * current_road)),a.height*0.2)
+    x.bezierCurveTo((a.width*0.4 + (a.width*0.009) * current_road),a.height*0.2,
+                    
+                    a.width*0.2 ,a.height*0.6,
+                    a.width*0.2,a.height*0.8
+                    )
+    x.fill()
+    //Draw center line.
+    //for (n=0; n++; n<5)
+    //{
+        x.fillStyle = "#fff"
+        x.beginPath()
+        
+        x.moveTo(a.width*0.49,a.height*0.8)
+        // bottom line
+        x.lineTo(a.width*0.51,a.height*0.8)
+        /*
+        x.lineTo(a.width*0.75,a.height*0.75)
+        x.lineTo((a.width/10)*(7+ current_road),a.height/2)*/
+        x.bezierCurveTo(a.width*0.51,a.height*0.8,
+                        a.width*0.51 ,a.height*0.6,
+                        (a.width*0.51 + (a.width*0.009) * current_road),a.height*0.2)
+        x.lineTo((a.width*0.49 + (a.width*0.009 * current_road)),a.height*0.2)
+        x.bezierCurveTo((a.width*0.49 + (a.width*0.009) * current_road),a.height*0.2,
+                        
+                        a.width*0.49 ,a.height*0.6,
+                        a.width*0.49,a.height*0.8
+                        )
+        x.fill()
+    //}
+}
+
+// this function takes a coordinate relative to the road and then calculates the actualy position it needs to be rendered on the X axis.
+// x == 0 is the center of the road.
+function calcActualX(x,y)
+{
+    var result = 0;
+    if (y>=a.height*0.2 && y<=a.height*0.8)
+    {
+        //we have a valid set of coordinates in the y axis
+        result = a.width/2 + (a.width*0.01*current_road)
+    }
+    //a.width*0.51 y== height * 0.6
+    //(a.width*0.51 + (a.width*0.009) * current_road) 0.2
+}
+
+function updateRoad()
+{
+    if (car_speed > 0 )
+    {
+        if (Math.random()*100<2)
+        {
+            //update road direction
+            road_direction = Math.floor(Math.random()*3)-1;
+        }
+    
+        switch (road_direction)
+        {
+            case -1:
+                if (current_road>-50)
+                {
+                    current_road-=car_speed/60;
+                }
+                break;
+            case 0:
+                if (current_road>2)
+                {
+                    current_road-=car_speed/60;
+                } else if (current_road<-2)
+                {
+                    current_road+=car_speed/60;
+                }
+                break;
+            case 1:
+                if (current_road<50)
+                {
+                    current_road+=car_speed/60;
+                }
+                break;
+        }
+    }
+
 }
 
 /**

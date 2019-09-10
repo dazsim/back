@@ -49,7 +49,7 @@
                     {
                         if (car_x > (a.width*0.1))
                         {
-                            car_x-=(a.width*0.02)*Math.floor(Math.sqrt(car_speed/2))
+                            car_x-=Math.floor(Math.sqrt(car_speed*2.5))
                         } else
                         car_x = a.width*0.1
                     }
@@ -57,7 +57,7 @@
                     {
                         if (car_x  < a.width - (a.width*0.2))
                         {
-                            car_x+=(a.width*0.02)*Math.floor(Math.sqrt(car_speed/2))
+                            car_x+=Math.floor(Math.sqrt(car_speed*2.5))
                         }
                     }
                     if (Key.isDown(Key.S))
@@ -73,17 +73,10 @@
                     if (car_speed > 0 )
                     {
                         // 1 in 10 chance
-                        if (!Math.floor(Math.random() * 11) )
+                    
+                        if (car_x + road_direction > a.width*0.2 && car_x + road_direction < a.width*0.7)
                         {
-                            // update bend in road    
-                            current_road += (Math.floor(Math.random() * 4)-2)
-                            if (current_road<-3) current_road = -3
-                            if (current_road>3) current_road = 3
-                            console.log('current road: ' + current_road)
-                        }
-                        if (car_x + current_road > a.width*0.2 && car_x + current_road < a.width*0.7)
-                        {
-                            car_x -= current_road >0 ? 0.01 : current_road <0 ? -0.01 : 0; //* (car_speed/2)
+                            car_x -= road_direction >0 ? 0.01 : road_direction <0 ? -0.01 : 0; //* (car_speed/2)
                             car_y = 0
                         } else
                         {
@@ -99,8 +92,10 @@
                         }
                     }
                     // apply bend to car movement
-                    
-                    
+                    if (road_direction>0)
+                    car_x -= car_speed/8
+                    if (road_direction<0)
+                    car_x += car_speed/8
 
                     // draw background
                     x.fillStyle = "#99f";
@@ -110,25 +105,8 @@
                     x.fillStyle = "#2b2"
                     x.fillRect(0,a.height*0.2,a.width,a.height *0.6)
                     // draw road
-                    x.fillStyle = "#002"
-                    x.beginPath()
-                    
-                    x.moveTo(a.width*0.2,a.height-a.height*0.2)
-                    // bottom line
-                    x.lineTo(a.width*0.8,a.height-a.height*0.2)
-                    /*
-                    x.lineTo(a.width*0.75,a.height*0.75)
-                    x.lineTo((a.width/10)*(7+ current_road),a.height/2)*/
-                    x.bezierCurveTo(a.width*0.75,a.height*0.75-a.height*0.2,
-                                    (a.width*0.75 + (a.width/10)*(7+ current_road))/2,a.height*0.75-a.height*0.2,
-                                    (a.width/10)*(7+ current_road),a.height*0.2)
-                    x.lineTo((a.width/10)*(3+ current_road),a.height*0.2)
-                    x.bezierCurveTo((a.width/10)*(3+ current_road),a.height*0.2,
-                                    
-                                    (a.width*0.25 + (a.width/10)*(3+ current_road))/2,a.height*0.45,
-                                    a.width*0.25,a.height*.45
-                                    )
-                    x.fill()
+                    drawRoad()
+                    updateRoad()
 
                      // draw car
                      drawCar(x,car_x,a.height*0.5 + car_y,0,a.height*0.2,car_speed)
@@ -240,8 +218,15 @@
                     drawGuage(x,a.width*0.68,a.height*0.8+car_y,Math.floor(health))
                     drawGuage(x,a.width*0.85,a.height*0.8+car_y,Math.floor(fuel))
                     
+
+                    // draw horizon
+                    drawHorizon(x)
+                    // draw collidable entities
                     position+=car_speed
-                    
+                    direction = Math.floor(direction - current_road*car_speed/4800)
+
+                    //text_direction = "Dir: " + direction
+                    //x.fillText(text_direction,(a.width*0.1),a.height*0.1)
                     break;
                 case 3: /* game over state */ 
                     // draw background
