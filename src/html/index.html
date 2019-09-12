@@ -2,11 +2,12 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Back</title>
+        <title>Back Home</title>
         <meta name="description" content="My js13kGame Entry">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
         <script src="../js/main.js"></script>
+        <script src="game.js"></script>
     </head>
     <body>
         
@@ -222,10 +223,15 @@
 
                     if (fuel<=0)
                     {
-                        text_gameover = "You ran out of fuel! remember to grab fuel on your journey"
+                        text_gameover = "You ran out of fuel! Better luck next time!"
                         screen = 3
                     }
-
+                   
+                    if (score/2000>250)
+                    {
+                        text_gameover = "You Won! Well done!"
+                        screen  = 3
+                    }
 
 
                     drawGuage(x,a.width*0.68,a.height*0.8+car_y,Math.floor(health))
