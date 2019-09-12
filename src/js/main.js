@@ -54,6 +54,10 @@ var car_y = 0;
 var car_speed = 0;
 var score = 0;
 var car_max_speed = 120;
+var tdy = 0;
+var tdx = 0;
+//var tdx = (Math.random()*200)-100;
+//var tdy = (Math.random()*a.height*0.6)+a.height*0.2;
 
 // direction of road -50 == left. 50 == right. 
 // -1,0,1
@@ -113,6 +117,8 @@ function resetGamestate()
     health = 100;
     fuel = 100;
     direction = 0;
+    tdx = a.width*0.2;
+    tdy = (Math.random()*a.height*0.5)+a.height*0.2
     
 }
 
@@ -495,14 +501,21 @@ function drawRoad()
 
 // this function takes a coordinate relative to the road and then calculates the actualy position it needs to be rendered on the X axis.
 // x == 0 is the center of the road.
-function calcActualX(x,y)
+function calcActualX(ax,ay)
 {
     var result = 0;
-    if (y>=a.height*0.2 && y<=a.height*0.8)
+    var tmp = 0;
+    console.log(ax)
+    // ratio between vertical position and where on curve you should be.
+    tmp = ((ay/a.height-0.2)/6)*10
+    console.log('ratio : ' + tmp)
+    console.log('offset : ' + ((ax*current_road)/50))
+    if (ay>=a.height*0.2 && ay<=a.height*0.8)
     {
         //we have a valid set of coordinates in the y axis
-        result = a.width/2 + (a.width*0.01*current_road)
+        result = a.width/2 + (ax*current_road*(1-tmp)/13)
     }
+    return result
     //a.width*0.51 y== height * 0.6
     //(a.width*0.51 + (a.width*0.009) * current_road) 0.2
 }

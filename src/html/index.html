@@ -112,7 +112,20 @@
                      drawCar(x,car_x,a.height*0.5 + car_y,0,a.height*0.2,car_speed)
                     
                     // draw road entities
-                    drawCactus(x,100,100,100)
+                    //calcActualX(x,y)
+                    
+                    /*console.log("x : " + tdx)
+                    console.log("y : " + tdy)
+                    console.log('Virtual X : ' + (tdx + (a.width/2)))
+                    console.log("Actual X : " + calcActualX(tdx,tdy))*/
+
+                    //drawCactus(x,calcActualX(tdx,tdy),tdy,60+180*(((tdy-a.width*0.2)/a.width*0.6)))
+                    tdy += car_speed/4;
+                    if (tdy >a.height*0.8)
+                    {
+                        tdy = a.height*0.2
+                    }
+                    
 
                     // draw car dash
 
